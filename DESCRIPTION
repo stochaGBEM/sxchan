@@ -1,0 +1,25 @@
+Package: sxchan
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+    c(
+    person("Vincenzo", "Coia", email = "vcoia@bgcengineering.ca", 
+           role = "aut"),
+    person("Jane", "Wang", email = "jwang@bgcengineering.ca",
+           role = "aut"),
+    person("Lucy", "MacKenzie", email = "lmackenzie@bgcengineering.ca",
+           role = "aut", "cre"),
+    person("Brett", "Eaton", email = "beaton@bgcengineering.ca",
+           role = c("aut")),
+    person("Sarah", "Davidson", email = "sdavidson@bgcengineering.ca",
+           role = "aut")
+    )
+Description: Simple cross section channel object
+License: CC BY-NC 4.0
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+URL: https://stochagbem.github.io/sxchan/
+Imports:
+    sf,
+    sfdct

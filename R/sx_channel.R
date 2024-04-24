@@ -3,7 +3,9 @@
 #'
 #' @param channel Shapefile file containing channel geometries
 #' @export
-channel <- function(channel) {
+sx_channel <- function(channel, class = character()) {
+
+  structure(channel, class = c(class, "list", "channel"))
 
   ch <- list()
   ch[["channel"]] <- sf::read_sf(channel)

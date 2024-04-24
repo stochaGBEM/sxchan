@@ -22,4 +22,6 @@ RoxygenNote: 7.2.3
 URL: https://stochagbem.github.io/sxchan/
 Imports:
     sf,
-    sfdct
+    tidygraph,
+    sfnetworks,
+    magrittr

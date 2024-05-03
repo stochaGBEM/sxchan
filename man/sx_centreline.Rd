@@ -2,9 +2,12 @@
 % Please edit documentation in R/sx_centreline.R
 \name{sx_centreline}
 \alias{sx_centreline}
+\alias{sx_centerline}
 \title{Creates or obtains the centreline of the channel object}
 \usage{
-sx_centreline(channel, centerline = NULL)
+sx_centreline(channel, centreline = NULL)
+
+sx_centerline(channel, centreline = NULL)
 }
 \arguments{
 \item{channel}{channel object}

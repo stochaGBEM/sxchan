@@ -1,10 +1,14 @@
 #' Creates or obtains the centreline of the channel object
 #'
+#' Creates or obtains the centreline of the channel object. `sx_centerline()`
+#' is an alias for `sx_centreline()`.
+#'
 #' @param channel channel object
 #' @param centerline shapefile containing the centerline linestring geometries
 #' If not supplied, the function will delineate a centerline based on the channel
 #' object
 #'
+#' @rdname sx_centreline
 #' @export
 sx_centreline <- function(channel, centreline = NULL) {
 
@@ -39,3 +43,7 @@ sx_centreline <- function(channel, centreline = NULL) {
   channel[["centreline"]] <- centerline
   channel
 }
+
+#' @rdname sx_centreline
+#' @export
+sx_centerline <- sx_centreline

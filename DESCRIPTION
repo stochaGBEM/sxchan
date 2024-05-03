@@ -8,7 +8,7 @@ Authors@R:
     person("Jane", "Wang", email = "jwang@bgcengineering.ca",
            role = "aut"),
     person("Lucy", "MacKenzie", email = "lmackenzie@bgcengineering.ca",
-           role = "aut", "cre"),
+           role = c("aut", "cre")),
     person("Brett", "Eaton", email = "beaton@bgcengineering.ca",
            role = c("aut")),
     person("Sarah", "Davidson", email = "sdavidson@bgcengineering.ca",
@@ -24,3 +24,6 @@ Imports:
     sf,
     tidygraph,
     sfnetworks
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

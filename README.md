@@ -1,4 +1,25 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-Simple x-section channel features
+# sxchan
+
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/stochaGBEM/sxchan/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/stochaGBEM/sxchan/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/stochaGBEM/sxchan/branch/main/graph/badge.svg)](https://app.codecov.io/gh/stochaGBEM/sxchan?branch=main)
+<!-- badges: end -->
+
+Simple x-section channel features.
+
+## Installation
+
+You can install the development version of sxchan from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("stochaGBEM/sxchan")
+```
+
+## Example

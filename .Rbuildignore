@@ -1,2 +1,8 @@
 ^sxchan\.Rproj$
 ^\.Rproj\.user$
+^README\.Rmd$
+^\.github$
+^codecov\.yml$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

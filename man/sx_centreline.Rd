@@ -5,9 +5,9 @@
 \alias{sx_centerline}
 \title{Creates or obtains the centreline of the channel object}
 \usage{
-sx_centreline(channel, centreline = NULL)
+sx_centreline(channel)
 
-sx_centerline(channel, centreline = NULL)
+sx_centerline(channel)
 }
 \arguments{
 \item{channel}{channel object}

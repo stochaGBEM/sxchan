@@ -24,7 +24,8 @@ Imports:
     sf,
     tidygraph,
     sfnetworks,
-    tibble
+    tibble,
+    centerline
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

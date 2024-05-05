@@ -17,5 +17,6 @@ If not supplied, the function will delineate a centerline based on the channel
 object}
 }
 \description{
-Creates or obtains the centreline of the channel object
+Creates or obtains the centreline of the channel object. \code{sx_centerline()}
+is an alias for \code{sx_centreline()}.
 }

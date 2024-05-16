@@ -20,7 +20,7 @@ new_channel <- function(l, ..., class = character()) {
 #' @examples
 #' channel(my_banks)
 #' @export
-channel <- function(bankline, centerline = NULL) {
+channel <- function(bankline, centerline = NULL, cross_sections = NULL) {
   river_channel <- list(bankline = bankline, centerline = centerline)
   new_channel(river_channel)
 }

@@ -32,3 +32,33 @@ devtools::install_github("stochaGBEM/sxchan")
 ```
 
 ## Example
+
+```{r}
+library(sxchan)
+```
+
+Here is an example of a bankline polygon:
+
+```{r}
+# plot(my_banks)
+```
+
+It's an sf polygon object:
+
+```{r}
+class(my_banks)
+```
+
+Start a channel object containing the banks.
+
+```{r}
+ch <- channel(my_banks)
+```
+
+Get centerline:
+
+```{r}
+sx_centerline(ch) |> 
+  plot()
+```
+

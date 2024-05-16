@@ -4,5 +4,6 @@
 #' @returns A centerline.
 #' @details Currently just calls `centerline::cnt_path_guess()`.
 bankline_to_centerline <- function(sf_banks) {
-  centerline::cnt_path_guess(sf_banks)
+  # sf::st_multilinestring(centerline::cnt_path_guess(sf_banks))
+  sf::st_geometry(centerline::cnt_path_guess(sf_banks))
 }

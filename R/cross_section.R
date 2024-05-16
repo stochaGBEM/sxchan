@@ -22,6 +22,10 @@
 #' @returns A `"cross_section"` object.
 #' @export
 cross_section <- function(width, grad, d50, d84, roughness, rootdepth = 0) {
+  if (!inherits(width, "sfg") && !inherits(width, "sfc")) {
+    if (width <= 0) stop("Must have a positive width.")
+    width <- sf::st_linestring(matrix(c(0, width, 0, 0), ncol = 2))
+  }
   l <- list(width = width,
             grad = grad,
             d50 = d50,
@@ -42,13 +46,10 @@ cross_section <- function(width, grad, d50, d84, roughness, rootdepth = 0) {
 #' intended to be run for its side effects: namely, throwing an error if the
 #' cross_section is invalid.
 validate_cross_section <- function(cross_section) {
-  lengths <- vapply(cross_section, length, FUN.VALUE = integer(1L))
+  lengths <- vapply(cross_section, length, FUN.VALUE = integer(1L))[-1]
   if (any(lengths != 1)) {
     stop("Cross Section properties must be single numerics. The following are not:",
          paste(names(cross_section)[lengths != 1], collapse = ", "), ".")
-  }
-  if (cross_section$width <= 0) {
-    stop("Cross Section must have a postive width.")
   }
   if (cross_section$grad <= 0) {
     stop("Cross Section must have a postive energy gradient (`grad`).")

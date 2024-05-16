@@ -3,6 +3,9 @@
 #' @param bankline,centerline Bankline and centerline
 #' @param num Number of cross sections to take from the channel.
 #' @returns A list of cross sections.
+#' @examples
+#' calculate_xs(my_channel, num = 100)
+#'
 calculate_xs <- function(channel, num) {
   bl <- channel$bankline
   cl <- sx_centerline(channel)
@@ -43,7 +46,6 @@ calculate_xs <- function(channel, num) {
   xs <- sf::st_as_sfc(unlist(xs, recursive = FALSE))
   # pts_new <- sf::st_as_sf(sf::st_multipoint(do.call(rbind, pts_new)))
   lapply(xs, \(x) {
-    width_ <- sf::st_length(x)
-    gbem::cross_section(width = width_, grad = 0.01, d50 = 45, d84 = 80, roughness = 0.01)
+    cross_section(width = x, grad = 0.01, d50 = 45, d84 = 80, roughness = 0.01)
   })
 }

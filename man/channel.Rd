@@ -4,7 +4,7 @@
 \alias{channel}
 \title{Make a new channel}
 \usage{
-channel(bankline, centerline = NULL)
+channel(bankline, centerline = NULL, cross_sections = NULL)
 }
 \arguments{
 \item{bankline}{Bankline \code{sf} polygon.}

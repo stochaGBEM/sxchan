@@ -5,7 +5,7 @@
 #' @returns A list of cross sections.
 #' @examples
 #' calculate_xs(my_channel, num = 100)
-#'
+#' @export
 calculate_xs <- function(channel, num) {
   bl <- channel$bankline
   cl <- sx_centerline(channel)
@@ -21,7 +21,7 @@ calculate_xs <- function(channel, num) {
   )
   # Generate parallel cross sections from each line segment.
   xy0 <- sf::st_centroid(cl)
-  line0 <- (cl - xy0) / st_length(cl) * maxd
+  line0 <- (cl - xy0) / sf::st_length(cl) * maxd
   rot_mat90 <- matrix(c(0, 1, -1, 0), nrow = 2, ncol = 2, byrow = FALSE)
   perp0 <- line0 * rot_mat90
   perp <- perp0 + xy0
@@ -34,7 +34,7 @@ calculate_xs <- function(channel, num) {
     pts_new[[id]] <- pts[[id]]
     m <- nrow(pts[[id]])
     l <- list()
-    shifts <- pts[[id]] - st_centroid(pts[[id]])
+    shifts <- pts[[id]] - sf::st_centroid(pts[[id]])
     # perp_vec <- rep(perp[id], m) + shifts
     # xy0_ <- sf::st_centroid(pt_)
     for (i in seq_len(m)) {

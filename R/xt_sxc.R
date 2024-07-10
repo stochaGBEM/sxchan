@@ -4,7 +4,6 @@
 #' with `xt_sx()`, where cross section characteristics like roughness and
 #' gradient can be specified. Cross section geometries (line segments)
 #' are created with `xt_sxc()`.
-#'
 #' @param x Object to create cross sections out of. Can be a vector of
 #' (positive) widths if the spatial orientation is not important;
 #' can be line segments created using the sf package.
@@ -56,7 +55,7 @@ xt_sxc.default <- function(x, ...) {
   ## Construct an sfc object with linestring geometry of specified widths.
   segs <- list()
   for (i in seq_along(x)) {
-    segs[[i]] <- sf::st_linestring(matrix(c(0, w, i, i), ncol = 2))
+    segs[[i]] <- sf::st_linestring(matrix(c(0, x[i], i, i), ncol = 2))
   }
   geom <- sf::st_sfc(segs, ...)
   ## Add features
@@ -67,53 +66,53 @@ xt_sxc.default <- function(x, ...) {
   #validate_sxc(geom)
 }
 
-#' @export
-xt_sxc.sf <- function(width, ..., grad, d50, roughness, rootdepth = 0) {
-  # Only take the geometry column
-  geometry_col <- attr(width, "sf_column")
-  width_sfc <- width[[geometry_col]]
-  cross_section(width_sfc, graad, d50, roughness, rootdepth)
-}
-
-#' @export
-xt_sxc.sfc <- function(width, ..., grad, d50, roughness, rootdepth = 0) {
-  # A list of geometries; loop along each to give a list of cross sections.
-  lapply(width, cross_section)
-}
-
-#' @export
-xt_sxc.sfg <- function(width, ..., grad, d50, roughness, rootdepth = 0) {
-
-}
-
-#' Cross Section Features
+#' #' @export
+#' xt_sxc.sf <- function(width, ..., grad, d50, roughness, rootdepth = 0) {
+#'   # Only take the geometry column
+#'   geometry_col <- attr(width, "sf_column")
+#'   width_sfc <- width[[geometry_col]]
+#'   cross_section(width_sfc, graad, d50, roughness, rootdepth)
+#' }
 #'
-#' Makes a list of cross section features. Useful because it
-#' indicates features that are useful for algorithms like gbem;
-#' otherwise, there is no difference from a list.
-xt_features <- function(
-    ...,
-    grad = NULL,
-    d50 = NULL,
-    d84 = NULL,
-    roughness = NULL,
-    rootdepth = NULL
-) {
-  dots <- list2(
-    ..., grad = grad, d50 = d50, d84 = d84, roughness = roughness,
-    rootdepth = rootdepth
-  )
-  nulls <- vapply(dots, is.null, logical(1))
-  dots[!nulls]
-}
+#' #' @export
+#' xt_sxc.sfc <- function(width, ..., grad, d50, roughness, rootdepth = 0) {
+#'   # A list of geometries; loop along each to give a list of cross sections.
+#'   lapply(width, cross_section)
+#' }
+#'
+#' #' @export
+#' xt_sxc.sfg <- function(width, ..., grad, d50, roughness, rootdepth = 0) {
+#'
+#' }
 
-xt_add_features <- function(
-    xs, ..., grad = NULL, d50 = NULL, d84 = NULL, roughness = NULL,
-    rootdepth = NULL
-  ) {
-  f <- sx_features(
-    ..., grad = grad, d50 = d50, d84 = d84, roughness = roughness,
-    rootdepth = rootdepth
-  )
-  rlang::exec("sf::st_sf", geom = xs, !!!f)
-}
+#' #' Cross Section Features
+#' #'
+#' #' Makes a list of cross section features. Useful because it
+#' #' indicates features that are useful for algorithms like gbem;
+#' #' otherwise, there is no difference from a list.
+#' xt_features <- function(
+#'     ...,
+#'     grad = NULL,
+#'     d50 = NULL,
+#'     d84 = NULL,
+#'     roughness = NULL,
+#'     rootdepth = NULL
+#' ) {
+#'   dots <- list2(
+#'     ..., grad = grad, d50 = d50, d84 = d84, roughness = roughness,
+#'     rootdepth = rootdepth
+#'   )
+#'   nulls <- vapply(dots, is.null, logical(1))
+#'   dots[!nulls]
+#' }
+#'
+#' xt_add_features <- function(
+#'     xs, ..., grad = NULL, d50 = NULL, d84 = NULL, roughness = NULL,
+#'     rootdepth = NULL
+#'   ) {
+#'   f <- sx_features(
+#'     ..., grad = grad, d50 = d50, d84 = d84, roughness = roughness,
+#'     rootdepth = rootdepth
+#'   )
+#'   rlang::exec("sf::st_sf", geom = xs, !!!f)
+#' }

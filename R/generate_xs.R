@@ -17,16 +17,23 @@
 #' centerline. Cross sections are calculated at these points. Note that
 #' cross sections are not a necessary part of choosing cross section spacing,
 #' but it is useful.
-#' @note The function of bank-to-bank width for a given angle of the line
-#' crossing through a specified point is riddled with local minima. This
-#' function takes a remedial approach at mitigating this:
+#' @note The function the calculates bank-to-bank width for a given angle of
+#' the line crossing through a specified point is riddled with local minima.
+#' Currently, a remedial approach is taken to mitigating this:
 #' it first finds the minimum width on a grid of 10 angles between 0 and pi
 #' (inclusive) (or 100 if the minimum is not unique at first), and then
-#' optimizes the width function around the minimum found on the grid.
-#' An improved algorithm would be appropriate in the rare case the region
-#' containing the global minimum is missed.
+#' optimizes the width function around the minimum found on the grid. This
+#' slows down the algorithm noticeably, but not
+#' It's still possible, although likely very rare, for the global minimum
+#' to be missed. An improvement might involve choosing angles that do
+#' not intersect with the neighbouring cross section.
+#'
+#' Another improvement to consider is to ensure cross sections go between
+#' left bank and right bank. Since points are being sampled along the
+#' centerline, this should be less of an issue, but there's still a chance
+#' where a cross section will be identified for a "bay" in the channel.
 #' @export
-calculate_cross_sections <- function(n, banks) {
+generate_xs <- function(n, banks) {
   cl <- bankline_to_centerline(banks)
   len <- sum(sf::st_length(cl))
   pts <- sf::st_line_sample(cl, density = n / len)
@@ -41,7 +48,6 @@ calculate_cross_sections <- function(n, banks) {
   )
   xs <- list()
   for (i in seq_along(pts)) {
-    cat("|")
     # Make a function to calculate the width of a bank-to-bank line for a
     # given angle, for the first point in the centerline.
     calc_width <- function(angle) {

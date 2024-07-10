@@ -1,8 +1,3 @@
-# Flow:
-# 0. External function: bank_to_bank(this_point, bl, angle) --> generates segment bank to bank.
-# 1. Sample points along centerline.
-# 2. make function to optim angle.
-
 #' Generate a line segment from bank to bank
 #'
 #' Given a point within a channel, generate a line segment that goes from

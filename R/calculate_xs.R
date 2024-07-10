@@ -6,9 +6,9 @@
 #' @examples
 #' calculate_xs(my_channel, num = 100)
 #' @export
-calculate_xs <- function(channel, num) {
-  bl <- channel$bankline
-  cl <- sx_centerline(channel)
+calculate_xs <- function(banks, centerline, num) {
+  bl <- banks
+  cl <- centerline
   # sf::st_sample(cl, size = num, type = "regular")
   len <- sum(sf::st_length(cl))
   # https://stackoverflow.com/questions/74844804/finding-a-set-of-equally-spaced-perpendicular-lines-along-boundaries-in-r

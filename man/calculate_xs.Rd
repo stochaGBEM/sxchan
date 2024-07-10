@@ -4,7 +4,7 @@
 \alias{calculate_xs}
 \title{Generate cross sections from a channel}
 \usage{
-calculate_xs(channel, num)
+calculate_xs(banks, centerline, num)
 }
 \arguments{
 \item{num}{Number of cross sections to take from the channel.}
@@ -19,5 +19,4 @@ Generate cross sections from a channel
 }
 \examples{
 calculate_xs(my_channel, num = 100)
-
 }

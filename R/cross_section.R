@@ -21,20 +21,38 @@
 #' cross_section(3, grad = 0.01, d50 = 45, d84 = 80, roughness = 0.01)
 #' @returns A `"cross_section"` object.
 #' @export
-cross_section <- function(width, grad, d50, d84, roughness, rootdepth = 0) {
-  if (!inherits(width, "sfg") && !inherits(width, "sfc")) {
-    if (width <= 0) stop("Must have a positive width.")
-    width <- sf::st_linestring(matrix(c(0, width, 0, 0), ncol = 2))
-  }
-  l <- list(width = width,
-            grad = grad,
-            d50 = d50,
-            d84 = d84,
-            roughness = roughness,
-            rootdepth = rootdepth)
+cross_section <- function(width, grad, d50, d84, roughness, rootdepth = 0) UseMethod("cross_section")
+
+cross_section.default <- function(width, grad, d50, d84, roughness, rootdepth = 0) {
+  if (width <= 0) stop("Must have a positive width.")
+  width <- sf::st_linestring(matrix(c(0, width, 0, 0), ncol = 2))
+  l <- list(
+    width = width,
+    grad = grad,
+    d50 = d50,
+    d84 = d84,
+    roughness = roughness,
+    rootdepth = rootdepth
+  )
   res <- new_cross_section(l)
   validate_cross_section(res)
 }
+
+# cross_section.sf <- function(width, grad, d50, roughness, rootdepth = 0) {
+#   # Only take the geometry column
+#   geometry_col <- attr(width, "sf_column")
+#   width_sfc <- width[[geometry_col]]
+#   cross_section(width_sfc, graad, d50, roughness, rootdepth)
+# }
+#
+# cross_section.sfc <- function(width, grad, d50, roughness, rootdepth = 0) {
+#   # A list of geometries; loop along each to give a list of cross sections.
+#   lapply(width, cross_section)
+# }
+#
+# cross_section.sfg <- function(width, grad, d50, roughness, rootdepth = 0) {
+#
+# }
 
 #' Validator function for cross_section objects
 #'

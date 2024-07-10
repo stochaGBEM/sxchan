@@ -10,8 +10,8 @@
 #' whose bank-to-bank segment width is the smallest. Note that this does not
 #' imply that the cross section is unique, and in this case the cross section
 #' is arbitrarily taken to be the one closest to a 0-degree angle --
-#' although in almost all cases this should not be an issue.  
-#' 
+#' although in almost all cases this should not be an issue.
+#'
 #' To define the spacing of the cross sections, a centerline is
 #' first calculated, and equally spaced points are sampled along the
 #' centerline. Cross sections are calculated at these points. Note that
@@ -23,6 +23,8 @@
 #' it first finds the minimum width on a grid of 10 angles between 0 and pi
 #' (inclusive) (or 100 if the minimum is not unique at first), and then
 #' optimizes the width function around the minimum found on the grid.
+#' An improved algorithm would be appropriate in the rare case the region
+#' containing the global minimum is missed.
 #' @export
 calculate_cross_sections <- function(n, banks) {
   cl <- bankline_to_centerline(banks)

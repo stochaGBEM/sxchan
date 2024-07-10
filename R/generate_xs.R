@@ -33,7 +33,7 @@
 #' centerline, this should be less of an issue, but there's still a chance
 #' where a cross section will be identified for a "bay" in the channel.
 #' @export
-generate_xs <- function(n, banks) {
+xt_generate_xsc <- function(n, banks) {
   cl <- bankline_to_centerline(banks)
   len <- sum(sf::st_length(cl))
   pts <- sf::st_line_sample(cl, density = n / len)
@@ -76,5 +76,6 @@ generate_xs <- function(n, banks) {
     )[[1]]
   }
   ## Combine list of segments in xs into a single sf geometry
-  sf::st_as_sfc(xs)
+  geoms <- sf::st_as_sfc(xs)
+  xt_sxc(geoms)
 }

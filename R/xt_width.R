@@ -21,12 +21,3 @@ xt_width.sxc <- function(cross_section) {
   class(cross_section) <- class(cross_section)[-1] # sf weirdness
   sf::st_length(cross_section)
 }
-
-#' #' @param value Channel width in meters; single positive numeric.
-#' #' @rdname ch_width
-#' #' @export
-#' `ch_width<-` <- function(cross_section, value) {
-#'   cross_section$width <- value
-#'   validate_cross_section(cross_section)
-#'   cross_section
-#' }

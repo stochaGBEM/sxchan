@@ -66,6 +66,11 @@ xt_sxc.default <- function(x, ...) {
   #validate_sxc(geom)
 }
 
+#' @export
+xt_sxc.sfc <- function(x, ...) {
+  new_sxc(sf::st_sfc(x, ...))
+}
+
 #' #' @export
 #' xt_sxc.sf <- function(width, ..., grad, d50, roughness, rootdepth = 0) {
 #'   # Only take the geometry column
@@ -73,13 +78,7 @@ xt_sxc.default <- function(x, ...) {
 #'   width_sfc <- width[[geometry_col]]
 #'   cross_section(width_sfc, graad, d50, roughness, rootdepth)
 #' }
-#'
-#' #' @export
-#' xt_sxc.sfc <- function(width, ..., grad, d50, roughness, rootdepth = 0) {
-#'   # A list of geometries; loop along each to give a list of cross sections.
-#'   lapply(width, cross_section)
-#' }
-#'
+
 #' #' @export
 #' xt_sxc.sfg <- function(width, ..., grad, d50, roughness, rootdepth = 0) {
 #'

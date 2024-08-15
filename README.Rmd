@@ -13,14 +13,16 @@ knitr::opts_chunk$set(
 )
 ```
 
-# sxchan
+# sxchan: simple cross section channels features
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/stochaGBEM/sxchan/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/stochaGBEM/sxchan/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/stochaGBEM/sxchan/branch/main/graph/badge.svg)](https://app.codecov.io/gh/stochaGBEM/sxchan?branch=main)
 <!-- badges: end -->
 
-Simple x-section channel features.
+The purpose of sxchan is to represent a watercourse by its geometry and features. Key geometries include bankline polygons, centerlines, and cross sections. Features can be created ad hoc, such as channel roughness and amount of bankline vegetation.
+
+The name of the package is inspired by the **sf** package, which provides a simple interface for working with geometric objects paired with features. **sxchan** adds a layer on top of **sf**. Functions in **sxchan** start with a common prefix, `xt`, which stands for "cross-section type"; this is intended to parallel the **sf** package's function prefix, `st`, which stands for "spatial type".
 
 ## Installation
 
@@ -35,30 +37,77 @@ devtools::install_github("stochaGBEM/sxchan")
 
 ```{r}
 library(sxchan)
+library(sf)
 ```
 
-Here is an example of a bankline polygon:
+### Banklines
+
+Here is an example of a bankline polygon built in to the R package:
 
 ```{r}
-# plot(my_banks)
+plot(my_banks)
 ```
 
 It's an sf polygon object:
 
 ```{r}
-class(my_banks)
+my_banks
 ```
 
-Start a channel object containing the banks.
+This means we can add features using the **sf** package.
 
 ```{r}
-ch <- channel(my_banks)
+st_sf(my_banks, roughness = 0.01, swimmability = 5)
 ```
 
-Get centerline:
+(Note that objects are still immutable, which means the above command has not changed the `my_banks` object.)
+
+### Centerline
+
+Calculate a centerline object from the banklines. It is a linear feature from the **sf** package. 
 
 ```{r}
-sx_centerline(ch) |> 
-  plot()
+(cl <- xt_generate_centerline(my_banks))
 ```
 
+Visualize the channel and the centerline together:
+
+```{r}
+plot(my_banks)
+plot(cl, add = TRUE)
+```
+
+### Cross Sections
+
+You can also calculate cross sections from the bankline polygon. In this case, it is a collection of 100 line segments. 
+
+```{r}
+(xs <- xt_generate_xsc(my_banks, n = 100))
+```
+
+Here, "xs" stands for "cross section", and the suffix "c" implies only a geometry object is created, with no features (similar to **sf** terminology). Because **sxchan** sits on top of **sf**, features can be added using those functions, one for each cross section:
+
+```{r}
+st_sf(xs, swimmability = sqrt(1:100), roughness = 0.01)
+```
+
+Visualize the cross sections along with the bankline polygon:
+
+```{r}
+plot(my_banks)
+plot(xs, add = TRUE)
+```
+
+You can also widen the banklines, either using length units or multiplicative factors
+
+```{r}
+xs2 <- xt_widen_by(xs, by = seq(-100, 100, length.out = 100))
+plot(my_banks)
+plot(xs2, add = TRUE)
+```
+
+```{r}
+xs3 <- xt_widen_times(xs, times = 1.5)
+plot(my_banks)
+plot(xs3, add = TRUE)
+```

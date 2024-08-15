@@ -10,7 +10,7 @@ sx_centerline <- function(channel) {
   if (!is.null(channel$centerline)) {
     channel$centerline
   } else {
-    bankline_to_centerline(channel$bankline)
+    xt_generate_centerline(channel$bankline)
   }
 }
 

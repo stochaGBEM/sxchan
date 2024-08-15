@@ -2,7 +2,7 @@
 xt_widen <- function(cross_section, by) UseMethod("xt_widen")
 
 #' @export
-xt_widen.xs <- function(cross_section, by) {
+xt_widen.sx <- function(cross_section, by) {
   wider <- xt_widen(cross_section$geom)
   cross_section$geom <- wider
   cross_section

@@ -32,9 +32,12 @@
 #' left bank and right bank. Since points are being sampled along the
 #' centerline, this should be less of an issue, but there's still a chance
 #' where a cross section will be identified for a "bay" in the channel.
+#' @examples
+#' xt_generate_xsc(my_banks, 100)
+#'
 #' @export
-xt_generate_xsc <- function(n, banks) {
-  cl <- bankline_to_centerline(banks)
+xt_generate_xsc <- function(banks, n) {
+  cl <- xt_generate_centerline(banks)
   len <- sum(sf::st_length(cl))
   pts <- sf::st_line_sample(cl, density = n / len)
   # Only take points that are not empty, and split apart multipoints

@@ -1,10 +1,12 @@
 #' Get a new channel bankline from cross sections.
 channelize <- function(cross_sections) UseMethod("channelize")
 
+#' @export
 channelize.sx <- function(cross_sections) {
   channelize(cross_sections$geom)
 }
 
+#' @export
 channelize.sxc <- function(cross_sections) {
     ## Concatenate the cross sections into a multilinesegment
     cross_sections <- st_union(cross_sections)

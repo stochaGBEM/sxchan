@@ -4,12 +4,9 @@
 \name{my_banks}
 \alias{my_banks}
 \alias{my_channel}
-\alias{my_complete_channel}
 \title{Example bankline and corresponding channel object}
 \format{
 An object of class \code{sfc_POLYGON} (inherits from \code{sfc}) of length 1.
-
-An object of class \code{channel} of length 2.
 
 An object of class \code{channel} of length 2.
 }
@@ -17,8 +14,6 @@ An object of class \code{channel} of length 2.
 my_banks
 
 my_channel
-
-my_complete_channel
 }
 \description{
 Example bankline and corresponding channel object

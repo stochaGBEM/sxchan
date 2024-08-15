@@ -4,12 +4,12 @@
 \alias{xt_generate_xsc}
 \title{Calculate Cross Sections from Banklines}
 \usage{
-xt_generate_xsc(n, banks)
+xt_generate_xsc(banks, n)
 }
 \arguments{
-\item{n}{The number of cross sections to calculate.}
-
 \item{banks}{An sf object with banklines.}
+
+\item{n}{The number of cross sections to calculate.}
 }
 \value{
 An sf object with cross sections.
@@ -48,4 +48,8 @@ Another improvement to consider is to ensure cross sections go between
 left bank and right bank. Since points are being sampled along the
 centerline, this should be less of an issue, but there's still a chance
 where a cross section will be identified for a "bay" in the channel.
+}
+\examples{
+xt_generate_xsc(my_banks, 100)
+
 }

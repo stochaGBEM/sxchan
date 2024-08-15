@@ -111,8 +111,3 @@ my_banks <- sf::st_as_sf(tibble::tribble(
 #' @rdname example_channel
 #' @export
 my_channel <- channel(my_banks)
-
-#' @rdname example_channel
-#' @export
-my_complete_channel <- channel(my_banks, bankline_to_centerline(my_banks),
-                               calculate_xs(my_channel, 100))

@@ -39,7 +39,7 @@
 #' which is a special type of "sf" object. For `st_sxc()`, cross section
 #' geometry objects with class "sxc", which is a special type of "sfc"
 #' object.
-#' @rdname xt_sx
+#' @rdname xt_sxc
 #' @export
 xt_sxc <- function(x, ...) UseMethod("xt_sxc")
 

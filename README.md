@@ -58,7 +58,7 @@ plot(cross1)
 
 ``` r
 seg <- st_linestring(matrix(c(0, 1, 0, 1), ncol = 2))
-cross2 <- xt_sxc(seg)
+cross2 <- xt_sxc(seg, crs = 3005)
 plot(cross2)
 ```
 
@@ -73,7 +73,7 @@ xt_width(cross1)
 
 ``` r
 xt_width(cross2)
-#> [1] 1.414214
+#> 1.414214 [m]
 ```
 
 Because these cross sections are just `sfc` objects from the sf package,

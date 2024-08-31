@@ -55,7 +55,7 @@ plot(cross1)
 
 ```{r}
 seg <- st_linestring(matrix(c(0, 1, 0, 1), ncol = 2))
-cross2 <- xt_sxc(seg)
+cross2 <- xt_sxc(seg, crs = 3005)
 plot(cross2)
 ```
 

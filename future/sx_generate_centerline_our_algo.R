@@ -11,7 +11,7 @@
 #' object
 #'
 #' @rdname sx_centreline_manual
-sx_centreline_manual <- function(channel) {
+xt_generate_centerline_our_algo <- function(channel) {
 
   if (!is.null(channel$centreline)) {
     centerline <- sf::read_sf(centreline)

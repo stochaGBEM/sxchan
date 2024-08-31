@@ -9,12 +9,12 @@ bank_to_bank(pt, banks, angle)
 \arguments{
 \item{pt}{A point within the channel.}
 
-\item{angle}{The angle of the line segment, in radians.}
+\item{banks}{The bankline of the channel.}
 
-\item{bl}{The bankline of the channel.}
+\item{angle}{The angle of the line segment, in radians.}
 }
 \value{
-A line segment from bank to bank.
+A line segment spanning from bank to bank.
 }
 \description{
 Given a point within a channel, generate a line segment that goes from

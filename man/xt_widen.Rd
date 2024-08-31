@@ -5,12 +5,12 @@
 \alias{xt_widen_times}
 \title{Widen cross sections}
 \usage{
-xt_widen_by(cross_section, by)
+xt_widen_by(object, by)
 
-xt_widen_times(cross_section, times)
+xt_widen_times(object, times)
 }
 \arguments{
-\item{cross_section}{A cross section object.}
+\item{object}{A cross section object.}
 
 \item{by}{Amount to widen the channel by, using units in common with the
 cross sectional units. Negative values will narrow cross sections. Either

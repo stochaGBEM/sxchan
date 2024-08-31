@@ -3,23 +3,30 @@
 #' 1 will narrow cross sections. Either
 #' a vector of length equal to the number of cross sections, or length 1.
 #' @export
-xt_widen_times <- function(cross_section, times) UseMethod("xt_widen_times")
+xt_widen_times <- function(object, times) UseMethod("xt_widen_times")
 
 #' @export
-xt_widen_times.sx <- function(cross_section, times) {
-  wider <- xt_widen_times(cross_section$geom, times = times)
-  cross_section$geom <- wider
-  cross_section
+xt_widen_times.sf <- function(object, times) {
+  xs <- sf::st_geometry(object)
+  if (!is_sxc(xs)) {
+    stop(
+      "The geometry column in the inputted sf object is not a cross section ",
+      "object set (class 'sxc')."
+    )
+  }
+  wider <- xt_widen_times(xs, times = by)
+  sf::st_geometry(object) <- wider
+  object
 }
 
 #' @export
-xt_widen_times.sxc <- function(cross_section, times) {
-  n <- length(cross_section)
+xt_widen_times.sxc <- function(object, times) {
+  n <- length(object)
   times <- vctrs::vec_recycle(times, n)
   for (i in seq_len(n)) {
-    xs <- cross_section[[i]]
+    xs <- object[[i]]
     middle <- sf::st_centroid(xs)
-    cross_section[[i]] <- (xs - middle) * times[i] + middle
+    object[[i]] <- (xs - middle) * times[i] + middle
   }
-  new_sxc(sf::st_sfc(cross_section, recompute_bbox = TRUE))
+  new_sxc(sf::st_sfc(object, recompute_bbox = TRUE))
 }

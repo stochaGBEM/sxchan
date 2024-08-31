@@ -2,12 +2,9 @@
 % Please edit documentation in R/new_sx.R
 \name{new_sxc}
 \alias{new_sxc}
-\alias{new_sx}
 \title{Constructor functions for cross section objects}
 \usage{
 new_sxc(l, ..., class = character())
-
-new_sx(l, ..., class = character())
 }
 \arguments{
 \item{l}{Object to turn into a cross section.}
@@ -22,6 +19,5 @@ valid properties. The naming "sxc" is inspired by the sf package,
 which names geometries that have features "sfc".
 }
 \description{
-Stamps an object with either an "sxc" or "sx" class, on top of
-the object's existing class(es).
+Constructor functions for cross section objects
 }

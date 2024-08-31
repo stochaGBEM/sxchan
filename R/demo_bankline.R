@@ -1,7 +1,7 @@
-#' Example bankline and corresponding channel object
+#' Example bankline polygon
 #' @rdname example_channel
 #' @export
-my_banks <- sf::st_as_sf(tibble::tribble(
+demo_bankline <- sf::st_as_sf(tibble::tribble(
   ~x, ~y,
   656873.7, 5553711,
   656993.1, 5553738,
@@ -106,8 +106,3 @@ my_banks <- sf::st_as_sf(tibble::tribble(
   sf::st_combine() |>
   sf::st_cast("LINESTRING") |>
   sf::st_buffer(100)
-
-
-#' @rdname example_channel
-#' @export
-my_channel <- channel(my_banks)

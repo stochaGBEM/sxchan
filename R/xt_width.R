@@ -1,23 +1,28 @@
-#' Get and Set Channel Width
+#' Get Channel Width
 #'
-#' @param cross_section Cross section.
+#' @param object Cross section.
 #' @returns Cross section width; single numeric.
 #' @examples
-#' cs <- cross_section(3, grad = 0.01, d50 = 45, d84 = 90, roughness = 0.01)
-#' ch_width(cs)
-#' ch_width(cs) <- 10
-#' cs
-#' @rdname ch_width
+#' xs <- xt_sxc(1:3)
+#' xt_width(xs)
+#' @rdname xt_width
 #' @export
-xt_width <- function(cross_section) UseMethod("xt_width")
+xt_width <- function(object) UseMethod("xt_width")
 
 #' @export
-xt_width.sx <- function(cross_section) {
-  xt_width(cross_section$geom)
+xt_width.sf <- function(object) {
+  xs <- sf::st_geometry(object)
+  if (!is_sxc(xs)) {
+    stop(
+      "The geometry column in the inputted sf object is not a cross section ",
+      "object set (class 'sxc')."
+    )
+  }
+  xt_width(xs)
 }
 
 #' @export
-xt_width.sxc <- function(cross_section) {
-  class(cross_section) <- class(cross_section)[-1] # sf weirdness
-  sf::st_length(cross_section)
+xt_width.sxc <- function(object) {
+  class(object) <- class(object)[-1] # sf weirdness
+  sf::st_length(object)
 }

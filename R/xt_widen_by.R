@@ -4,26 +4,33 @@
 #' (narrows) by unit length; `xt_widen_times()` widens (narrows) by
 #' a multiplicative factor.
 #'
-#' @param cross_section A cross section object.
+#' @param object A cross section object.
 #' @param by Amount to widen the channel by, using units in common with the
 #' cross sectional units. Negative values will narrow cross sections. Either
 #' a vector of length equal to the number of cross sections, or length 1.
 #' @rdname xt_widen
 #' @export
-xt_widen_by <- function(cross_section, by) UseMethod("xt_widen_by")
+xt_widen_by <- function(object, by) UseMethod("xt_widen_by")
 
 #' @export
-xt_widen_by.sx <- function(cross_section, by) {
-  wider <- xt_widen_by(cross_section$geom, by = by)
-  cross_section$geom <- wider
-  cross_section
+xt_widen_by.sf <- function(object, by) {
+  xs <- sf::st_geometry(object)
+  if (!is_sxc(xs)) {
+    stop(
+      "The geometry column in the inputted sf object is not a cross section ",
+      "object set (class 'sxc')."
+    )
+  }
+  wider <- xt_widen_by(xs, by = by)
+  sf::st_geometry(object) <- wider
+  object
 }
 
 #' @export
-xt_widen_by.sxc <- function(cross_section, by) {
-  n <- length(cross_section)
+xt_widen_by.sxc <- function(object, by) {
+  n <- length(object)
   by <- vctrs::vec_recycle(by, n)
-  l <- xt_width(cross_section)
+  l <- xt_width(object)
   times <- (l + by) / l
-  xt_widen_times(cross_section, times = times)
+  xt_widen_times(object, times = times)
 }

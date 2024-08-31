@@ -4,10 +4,11 @@
 \alias{xt_generate_centerline}
 \title{Function to calculate a centerline from bankline polygon}
 \usage{
-xt_generate_centerline(sf_banks)
+xt_generate_centerline(bankline)
 }
 \arguments{
-\item{sf_banks}{\code{sf}, \code{sfc}, or \code{SpatVector} polygons object.}
+\item{bankline}{Channel bankline polygon as a geometric object:
+\code{sf}, \code{sfc}, or \code{SpatVector} polygons object.}
 }
 \value{
 A centerline.
@@ -16,5 +17,5 @@ A centerline.
 Function to calculate a centerline from bankline polygon
 }
 \details{
-Currently just calls \code{centerline::cnt_path_guess()}.
+Wraps \code{centerline::cnt_path_guess()}.
 }

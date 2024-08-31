@@ -3,8 +3,8 @@
 #' Calculate cross sections from banklines that are roughly equally spaced
 #' apart.
 #' @param n The number of cross sections to calculate.
-#' @param banks An sf object with banklines.
-#' @return An sf object with cross sections.
+#' @param bankline An sf object with banklines.
+#' @return An "sxc" object.
 #' @details This function takes the definition of "cross section" relative
 #' to a point in the channel to be the line segment intersecting the point
 #' whose bank-to-bank segment width is the smallest. Note that this does not
@@ -33,11 +33,13 @@
 #' centerline, this should be less of an issue, but there's still a chance
 #' where a cross section will be identified for a "bay" in the channel.
 #' @examples
-#' xt_generate_xsc(my_banks, 100)
-#'
+#' bl <- sf::st_sfc(demo_bankline, crs = 3005)
+#' cross <- xt_generate_sxc(bl, n = 100)
+#' # Inherits spatial properties of the bankline polygon, such as CRS:
+#' sf::st_crs(cross)
 #' @export
-xt_generate_xsc <- function(banks, n) {
-  cl <- xt_generate_centerline(banks)
+xt_generate_sxc <- function(bankline, n) {
+  cl <- xt_generate_centerline(bankline)
   len <- sum(sf::st_length(cl))
   pts <- sf::st_line_sample(cl, density = n / len)
   # Only take points that are not empty, and split apart multipoints
@@ -45,7 +47,7 @@ xt_generate_xsc <- function(banks, n) {
   pts <- pts[sapply(pts, function(x) !sf::st_is_empty(x))]
   pts <- sf::st_cast(pts, "POINT")
   # Get maximum distance from bounding box
-  bb <- sf::st_bbox(banks)
+  bb <- sf::st_bbox(bankline)
   maxd <- sqrt(
     (bb[["xmax"]] - bb[["xmin"]])^2 + (bb[["ymax"]] - bb[["ymin"]])^2
   )
@@ -55,7 +57,7 @@ xt_generate_xsc <- function(banks, n) {
     # given angle, for the first point in the centerline.
     calc_width <- function(angle) {
       seg <- bank_to_bank_engine(
-        pts[i], banks, angle, maxd = maxd, intersect = TRUE,
+        pts[i], bankline, angle, maxd = maxd, intersect = TRUE,
         reposition = FALSE
       )
       sf::st_length(seg)
@@ -75,7 +77,7 @@ xt_generate_xsc <- function(banks, n) {
     # Use optimization to find the angle that minimizes the width
     res <- stats::optimize(calc_width, rng)$minimum
     xs[[i]] <- bank_to_bank_engine(
-      pts[i], banks, res, maxd = maxd, intersect = TRUE, reposition = TRUE
+      pts[i], bankline, res, maxd = maxd, intersect = TRUE, reposition = TRUE
     )[[1]]
   }
   ## Combine list of segments in xs into a single sf geometry

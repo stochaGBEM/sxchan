@@ -3,9 +3,9 @@
 #' Given a point within a channel, generate a line segment that goes from
 #' bank to bank, for a specified angle.
 #' @param pt A point within the channel.
-#' @param bl The bankline of the channel.
+#' @param banks The bankline of the channel.
 #' @param angle The angle of the line segment, in radians.
-#' @return A line segment from bank to bank.
+#' @return A line segment spanning from bank to bank.
 #' @export
 bank_to_bank <- function(pt, banks, angle) {
   bb <- sf::st_bbox(bl)

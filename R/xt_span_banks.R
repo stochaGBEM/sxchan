@@ -3,30 +3,53 @@
 #' Given a point within a channel, generate a line segment that goes from
 #' bank to bank, for a specified angle.
 #' @param pt A point within the channel.
-#' @param banks The bankline of the channel.
+#' @param bankline The bankline of the channel.
 #' @param angle The angle of the line segment, in radians.
 #' @return A line segment spanning from bank to bank.
+#' @note This function is the precursor to generating cross sections with
+#' `xt_generate_xsc()`.
+#' @examples
+#' # Pick a point in the channel, and an angle
+#' library(sf)
+#' pt <- st_centroid(demo_bankline) - c(0, 30)
+#' plot(demo_bankline)
+#' plot(pt, add = TRUE)
+#'
+#' ## 45 degrees:
+#' span <- xt_span_banks(pt, angle = pi / 4, bankline = demo_bankline)
+#' plot(span, add = TRUE, col = "blue")
+#'
+#' ## 0 degrees:
+#' span <- xt_span_banks(pt, angle = 0, bankline = demo_bankline)
+#' plot(span, add = TRUE, col = "blue")
 #' @export
-bank_to_bank <- function(pt, banks, angle) {
-  bb <- sf::st_bbox(banks)
+xt_span_banks <- function(pt, angle, bankline) {
+  bb <- sf::st_bbox(bankline)
   maxd <- sqrt(
     (bb[["xmax"]] - bb[["xmin"]])^2 + (bb[["ymax"]] - bb[["ymin"]])^2
   )
-  bank_to_bank_engine(
-    pt, banks, angle, maxd = maxd, intersect = TRUE, reposition = TRUE
+  span_banks_engine(
+    pt, angle, bankline = bankline, maxd = maxd, intersect = TRUE,
+    reposition = TRUE
   )
 }
 
-bank_to_bank_engine <- function(pt, banks, angle, maxd, intersect, reposition) {
+span_banks_engine <- function(
+    pt, angle, bankline, maxd, intersect, reposition
+) {
+  pt_coord <- sf::st_coordinates(pt)
   # Move the whole channel so that first_pt is at the origin
-  bl_moved <- banks - pt
+  bl_moved <- bankline - pt_coord
   # Construct a horizonal line going through the origin; but make sure
   # it's made up of three points -- the two ends, and the origin itself,
   # so that when it's rotated, (0, 0) is always on the line (otherwise,
   # it wouldn't be, as a result of rounding errors)
   horizontal_line <- sf::st_geometry(
-    sf::st_linestring(rbind(c(-maxd, 0), c(0, 0), c(maxd, 0)))
-    #crs = st_crs(bl)
+    sf::st_linestring(rbind(
+      c(-maxd, 0),
+      #c(0, 0),
+      c(maxd, 0)
+    ))
   )
   # Construct the rotation matrix for a given angle (deliberately the transpose
   # of the usual rotation matrix because the matrix needs to be on the RHS of
@@ -41,7 +64,7 @@ bank_to_bank_engine <- function(pt, banks, angle, maxd, intersect, reposition) {
   angled_line <- horizontal_line * rotation_matrix
   if (!intersect) {
     if (reposition) {
-      return(angled_line + pt)
+      return(angled_line + pt_coord)
     } else {
       return(angled_line)
     }
@@ -54,7 +77,7 @@ bank_to_bank_engine <- function(pt, banks, angle, maxd, intersect, reposition) {
   foo <- sf::st_intersects(intersections, sf::st_point(c(0, 0)), sparse = FALSE)
   relevant_segment <- intersections[foo]
   if (reposition) {
-    return(relevant_segment + pt)
+    return(relevant_segment + pt_coord)
   } else {
     return(relevant_segment)
   }

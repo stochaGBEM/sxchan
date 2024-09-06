@@ -56,8 +56,8 @@ xt_generate_sxc <- function(bankline, n) {
     # Make a function to calculate the width of a bank-to-bank line for a
     # given angle, for the first point in the centerline.
     calc_width <- function(angle) {
-      seg <- bank_to_bank_engine(
-        pts[i], bankline, angle, maxd = maxd, intersect = TRUE,
+      seg <- span_banks_engine(
+        pts[i], angle, bankline = bankline, maxd = maxd, intersect = TRUE,
         reposition = FALSE
       )
       sf::st_length(seg)
@@ -76,8 +76,9 @@ xt_generate_sxc <- function(bankline, n) {
     rng <- angles[i_min] + c(-delta, delta)
     # Use optimization to find the angle that minimizes the width
     res <- stats::optimize(calc_width, rng)$minimum
-    xs[[i]] <- bank_to_bank_engine(
-      pts[i], bankline, res, maxd = maxd, intersect = TRUE, reposition = TRUE
+    xs[[i]] <- span_banks_engine(
+      pts[i], res, bankline = bankline, maxd = maxd, intersect = TRUE,
+      reposition = TRUE
     )[[1]]
   }
   ## Combine list of segments in xs into a single sf geometry

@@ -1,5 +1,5 @@
 Package: sxchan
-Title: What the Package Does (One Line, Title Case)
+Title: Simple Channel Cross Sections
 Version: 0.0.0.9000
 Authors@R: 
     c(
@@ -14,20 +14,22 @@ Authors@R:
     person("Sarah", "Davidson", email = "sdavidson@bgcengineering.ca",
            role = "aut")
     )
-Description: Simple cross section channel object
-License: CC BY-NC 4.0
+Description: Create and manipulate watercourse geometries for 
+    geomorphology applications, with a 
+    focus on cross sections. This package extends the sf package, 
+    so geometries can also be manipulated using sf functionality.
+License: CC BY-NC 4.0 + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 URL: https://stochagbem.github.io/sxchan/
 Imports:
     sf,
-    tidygraph,
-    sfnetworks,
-    tibble,
-    centerline
+    centerline,
+    vctrs
 Suggests: 
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    units
 Config/testthat/edition: 3
 Depends: 
     R (>= 2.10)

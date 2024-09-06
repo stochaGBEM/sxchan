@@ -8,7 +8,7 @@
 #' @return A line segment spanning from bank to bank.
 #' @export
 bank_to_bank <- function(pt, banks, angle) {
-  bb <- sf::st_bbox(bl)
+  bb <- sf::st_bbox(banks)
   maxd <- sqrt(
     (bb[["xmax"]] - bb[["xmin"]])^2 + (bb[["ymax"]] - bb[["ymin"]])^2
   )

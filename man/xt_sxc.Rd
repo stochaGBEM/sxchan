@@ -2,7 +2,7 @@
 % Please edit documentation in R/xt_sxc.R
 \name{xt_sxc}
 \alias{xt_sxc}
-\title{Create channel cross sections}
+\title{Create channel cross sections object}
 \usage{
 xt_sxc(x, ...)
 }
@@ -13,50 +13,49 @@ can be line segments created using the sf package.}
 
 \item{...}{Optional arguments passed to \code{sf::st_sfc()} relating to the
 geometrical properties of the cross sections, such as \code{crs}.}
-
-\item{grad}{Energy gradient of the stream channel; single positive numeric.}
-
-\item{d50, d84}{Grain size distribution's 50th and 84th quantiles in
-millimeters; single positive numerics.}
-
-\item{roughness}{Manning's roughness; positive single numeric.}
-
-\item{rootdepth}{Effective rooting depth for vegetation; single non-negative
-numeric.}
 }
 \value{
-For \code{xt_sx()}, cross section objects with class "sx",
-which is a special type of "sf" object. For \code{st_sxc()}, cross section
-geometry objects with class "sxc", which is a special type of "sfc"
-object.
+A channel cross section object, with class "sxc", which is a
+subclass of sf's "sfc_LINESTRING" class.
+The nomenclature is inspired by the sf package, so that
+"sxc" stands for "spatial cross-section column".
 }
 \description{
-Create channel cross sections.
-Cross section geometries (line segments) are created with \code{xt_sxc()}.
-Cross section geometries can be paired with cross section characteristics
-like roughness and gradient with \code{xt_sx()}.
-}
-\details{
-Examples of effective rooting depth for vegetation, \code{rootdepth}, are:
-\itemize{
-\item grassy banks, no trees / shrubs: \code{rootdepth = 0.35}.
-\item 1 to 5\% tree / shrub cover: \code{rootdepth = 0.50}.
-\item 5 to 50\% tree / shrub cover: \code{rootdepth = 0.90}.
-\item more than 50\% tree / shrub cover: \code{rootdepth = 1.10}.
-}
-
-The nomenclature of these objects is inspired by the sf package.
-\itemize{
-\item "sxc" stands for "spatial cross-section column", and like sf's "sfc"
-objects, contains the cross section geometries.
-\item "sx" stands for "spatial cross-section", and like sf's "sf" objects,
-is a data frame where one of the columns is an "sxc" object, and
-other columns are features of the cross section (roughness, d50, etc.)
-}
+Channel cross sections are a lightweight wrapper on sf geometries
+(\code{sfc} objects), specifically a collection of line segments. This means
+that you can use functions from sf to manipulate these objects whenever
+special cross section methods do not exist.
 }
 \examples{
+# Create cross sections without worrying about spatial orientation.
 a <- xt_sxc(1:3)
-xt_sx(1:3, swimability = c(4, 2, 1))
-xt_sx(a, swimability = c(4, 2, 1))
 
+# Create cross sections from sf line segments, this time with a
+# coordinate reference system. Note that even though we input a
+# multilinestring, sxchan parses it into linestrings, so that each
+# cross section is a linestring.
+library(sf)
+seg <- st_multilinestring(list(
+  matrix(c(0, 1, 0, 1), ncol = 2),
+  matrix(c(0, 1.5, -0.5, 0), ncol = 2)
+))
+b <- xt_sxc(seg, crs = 3005)
+plot(b)
+
+# Because these objects are just sxc objects from the sf package,
+# we can manipulate them with sf.
+# - Subset to grab individual cross section line segments:
+b[[1]]
+b[[2]]
+
+# - Add arbitrary features to the cross sections.
+(b2 <- st_sf(b, roughness = 0.1, swimmability = c(4, 2)))
+
+# - Want to add / change more columns / features? It's just a data frame:
+b2$rockiness <- c(1, 1.1)
+b2
+plot(b2)
+
+# - The geometry column is still a cross section object
+st_geometry(b2)
 }

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# sxchan: simple cross section channels features
+# sxchan: simple channel cross sections
 
 <!-- badges: start -->
 
@@ -11,7 +11,7 @@ coverage](https://codecov.io/gh/stochaGBEM/sxchan/branch/main/graph/badge.svg)](
 <!-- badges: end -->
 
 The purpose of sxchan is to create and manipulate watercourse
-geometries, particularly cross sections. Because this package sits on
+geometries, with a focus on cross sections. Because this package sits on
 top of the sf package, geometries can also be manipulated in the same
 way as in the sf package.
 

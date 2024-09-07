@@ -94,7 +94,20 @@
 <span><span class="co">#&gt; 1.414214 [m]</span></span></code></pre></div>
 <p>Because these cross sections are just <code>sfc</code> objects from the sf package, you can add features by making it an <code>sf</code> object:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># st_sf(cross1, swimmability = c(5, 4, 3, 2, 1, 0), roughness = 0.01)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html" class="external-link">st_sf</a></span><span class="op">(</span><span class="va">cross1</span>, swimmability <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>, roughness <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Simple cross section collection with 6 cross sections</span></span>
+<span><span class="co">#&gt; Simple feature collection with 6 features and 2 fields</span></span>
+<span><span class="co">#&gt; Geometry type: </span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: 0 ymin: 1 xmax: 8 ymax: 6</span></span>
+<span><span class="co">#&gt; CRS:           NA</span></span>
+<span><span class="co">#&gt;   swimmability roughness                cross1</span></span>
+<span><span class="co">#&gt; 1            5      0.01 LINESTRING (0 1, 8 1)</span></span>
+<span><span class="co">#&gt; 2            4      0.01 LINESTRING (0 2, 7 2)</span></span>
+<span><span class="co">#&gt; 3            3      0.01 LINESTRING (0 3, 5 3)</span></span>
+<span><span class="co">#&gt; 4            2      0.01 LINESTRING (0 4, 6 4)</span></span>
+<span><span class="co">#&gt; 5            1      0.01 LINESTRING (0 5, 5 5)</span></span>
+<span><span class="co">#&gt; 6            0      0.01 LINESTRING (0 6, 8 6)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="generating-geometries-from-bankline-polygon">Generating geometries from bankline polygon<a class="anchor" aria-label="anchor" href="#generating-geometries-from-bankline-polygon"></a>

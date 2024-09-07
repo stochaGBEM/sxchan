@@ -35,6 +35,7 @@
 #' @examples
 #' bl <- sf::st_sfc(demo_bankline, crs = 3005)
 #' cross <- xt_generate_sxc(bl, n = 100)
+#' plot(bl); plot(cross, add = TRUE, col = "blue")
 #' # Inherits spatial properties of the bankline polygon, such as CRS:
 #' sf::st_crs(cross)
 #' @export

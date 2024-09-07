@@ -14,7 +14,7 @@ xt_widen_times.sf <- function(object, times) {
       "object set (class 'sxc')."
     )
   }
-  wider <- xt_widen_times(xs, times = by)
+  wider <- xt_widen_times(xs, times = times)
   sf::st_geometry(object) <- wider
   object
 }

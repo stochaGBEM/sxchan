@@ -74,8 +74,10 @@ span_banks_engine <- function(
   intersections <- sf::st_intersection(angled_line, bl_moved)
   intersections <- sf::st_cast(intersections, "LINESTRING")
   # Only take the intersection segment that goes through the origin.
-  foo <- sf::st_intersects(intersections, sf::st_point(c(0, 0)), sparse = FALSE)
-  relevant_segment <- intersections[foo]
+  # foo <- sf::st_intersects(intersections, sf::st_point(c(0, 0)), sparse = FALSE)
+  # relevant_segment <- intersections[foo]
+  distances <- sf::st_distance(intersections, sf::st_point(c(0, 0)))[, 1]
+  relevant_segment <- intersections[distances == min(distances)]
   if (reposition) {
     return(relevant_segment + pt_coord)
   } else {

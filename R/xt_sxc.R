@@ -16,7 +16,8 @@
 #' "sxc" stands for "spatial cross-section column".
 #' @examples
 #' # Create cross sections without worrying about spatial orientation.
-#' a <- xt_sxc(1:3)
+#' (a <- xt_sxc(1:3))
+#' print(a)
 #'
 #' # Create cross sections from sf line segments, this time with a
 #' # coordinate reference system. Note that even though we input a

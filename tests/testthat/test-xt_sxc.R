@@ -1,5 +1,7 @@
 test_that("Cross sections can be created with xt_sxc: numbers", {
   x <- xt_sxc(c(8, 7, 5, 6, 5, 8))
+  plot(x)
+  print(x)
   expect_true(is_sxc(x))
   expect_identical(length(x), 6L)
 })

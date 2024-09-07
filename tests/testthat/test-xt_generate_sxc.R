@@ -3,3 +3,4 @@ test_that("Cross sections can be generated.", {
   expect_true(is_sxc(x))
   expect_identical(length(x), 10L)
 })
+

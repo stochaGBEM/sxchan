@@ -1,27 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://stochagbem.github.io/sxchan/404.html</loc>
-  </url>
-  <url>
-    <loc>https://stochagbem.github.io/sxchan/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://stochagbem.github.io/sxchan/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://stochagbem.github.io/sxchan/index.html</loc>
-  </url>
-  <url>
-    <loc>https://stochagbem.github.io/sxchan/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://stochagbem.github.io/sxchan/reference/my_banks.html</loc>
-  </url>
-  <url>
-    <loc>https://stochagbem.github.io/sxchan/reference/sx_centreline.html</loc>
-  </url>
-  <url>
-    <loc>https://stochagbem.github.io/sxchan/reference/sx_channel.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://stochagbem.github.io/sxchan/404.html</loc></url>
+<url><loc>https://stochagbem.github.io/sxchan/LICENSE-text.html</loc></url>
+<url><loc>https://stochagbem.github.io/sxchan/authors.html</loc></url>
+<url><loc>https://stochagbem.github.io/sxchan/index.html</loc></url>
+<url><loc>https://stochagbem.github.io/sxchan/reference/demo_bankline.html</loc></url>
+<url><loc>https://stochagbem.github.io/sxchan/reference/index.html</loc></url>
+<url><loc>https://stochagbem.github.io/sxchan/reference/is_sxc.html</loc></url>
+<url><loc>https://stochagbem.github.io/sxchan/reference/new_sx.html</loc></url>
+<url><loc>https://stochagbem.github.io/sxchan/reference/xt_generate_centerline.html</loc></url>
+<url><loc>https://stochagbem.github.io/sxchan/reference/xt_generate_sxc.html</loc></url>
+<url><loc>https://stochagbem.github.io/sxchan/reference/xt_span_banks.html</loc></url>
+<url><loc>https://stochagbem.github.io/sxchan/reference/xt_sxc.html</loc></url>
+<url><loc>https://stochagbem.github.io/sxchan/reference/xt_widen.html</loc></url>
+<url><loc>https://stochagbem.github.io/sxchan/reference/xt_width.html</loc></url>
 </urlset>
+

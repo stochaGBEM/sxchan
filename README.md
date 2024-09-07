@@ -80,7 +80,20 @@ Because these cross sections are just `sfc` objects from the sf package,
 you can add features by making it an `sf` object:
 
 ``` r
-# st_sf(cross1, swimmability = c(5, 4, 3, 2, 1, 0), roughness = 0.01)
+st_sf(cross1, swimmability = c(5, 4, 3, 2, 1, 0), roughness = 0.01)
+#> Simple cross section collection with 6 cross sections
+#> Simple feature collection with 6 features and 2 fields
+#> Geometry type: 
+#> Dimension:     XY
+#> Bounding box:  xmin: 0 ymin: 1 xmax: 8 ymax: 6
+#> CRS:           NA
+#>   swimmability roughness                cross1
+#> 1            5      0.01 LINESTRING (0 1, 8 1)
+#> 2            4      0.01 LINESTRING (0 2, 7 2)
+#> 3            3      0.01 LINESTRING (0 3, 5 3)
+#> 4            2      0.01 LINESTRING (0 4, 6 4)
+#> 5            1      0.01 LINESTRING (0 5, 5 5)
+#> 6            0      0.01 LINESTRING (0 6, 8 6)
 ```
 
 ### Generating geometries from bankline polygon

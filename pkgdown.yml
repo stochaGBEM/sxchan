@@ -1,8 +1,8 @@
 pandoc: 3.1.11
-pkgdown: 2.1.0
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2024-09-07T05:36Z
+last_built: 2024-10-02T17:32Z
 urls:
   reference: https://stochagbem.github.io/sxchan/reference
   article: https://stochagbem.github.io/sxchan/articles

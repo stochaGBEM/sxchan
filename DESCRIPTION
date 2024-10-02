@@ -15,7 +15,7 @@ Authors@R:
            role = "aut")
     )
 Description: Create and manipulate watercourse geometries for 
-    geomorphology applications, with a 
+    geomorphology applications, with a        
     focus on cross sections. This package extends the sf package, 
     so geometries can also be manipulated using sf functionality.
 License: CC BY-NC 4.0 + file LICENSE
